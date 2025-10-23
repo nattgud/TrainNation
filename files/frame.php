@@ -57,8 +57,6 @@ if(isset($_GET["t"])) {
 				echo "_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
 			} elseif($leveldata[$level]["type"] === "text") {
 				echo "_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
-			// } elseif((isset($leveldata[$level]["variables"])) && ($leveldata[$level]["type"] === "log")) {
-			// 	echo "_________TRAINJS_RESULT_L(".json_encode(json_decode($leveldata[$level]["variables"])).");";
 			}
 		}
 ?>

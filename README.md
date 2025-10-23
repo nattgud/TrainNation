@@ -19,7 +19,7 @@ The system runs locally with standard web technologies and does not require any 
 - **Structure:** Organized under `/files/` (separate modules for JS logic and PHP endpoints)
 
 ## Purpose
-TrainNation is not a public service or commercial product.  
+TrainNation is not a public service or commercial product yet.  
 It’s a **personal learning and demonstration project** aimed at showing:
 - How to build an interactive coding environment from scratch  
 - How PHP and JavaScript can communicate securely  
@@ -30,5 +30,4 @@ Work in progress.
 Functionality and file structure may change over time as features evolve.
 
 ## Author
-Developed by **nattgud**.  
-The repository exists to demonstrate implementation ideas and provide a clear, minimal example of how such a system can be built.
+Developed by **David Andersson**.  
