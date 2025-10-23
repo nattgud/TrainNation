@@ -1,0 +1,268 @@
+* {
+	box-sizing: border-box;
+}
+nav ul {
+	padding: 0px;
+}
+nav ul > li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+}
+nav ul > li > a {
+	padding: 10px 20px;
+	background-color: #021;
+	transition: background-color 150ms;
+}
+nav ul > li > a:hover {
+	background-color: #043;
+}
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0px;
+	color: #fff;
+	overflow-x: hidden;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header, footer, main {
+	padding: 0px;
+	text-align: center;
+}
+header, footer {
+	flex: 0 0 100%;
+}
+main {
+	flex: 1 0 100%;
+	background-color: #00201a;
+}
+
+a {
+	color: #0ac;
+	text-decoration: none;
+	transition: color 150ms;
+}
+a:hover {
+	color: #acf;
+}
+header, footer {
+	background-color: #032;
+}
+header h2 {
+	font-size: 48pt;
+	margin: 20px 0px 0px;
+}
+header h2 .material-symbols-outlined {
+	font-size: 48pt;
+}
+
+main {
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+}
+main > section {
+	text-align: left;
+	flex: 1 1 100px;
+}
+main > section:first-of-type {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+main > section:first-of-type > div:first-of-type {
+	flex: 1 1 100px;
+}
+main > section:first-of-type > div:last-of-type {
+	flex: 0 1 0px;
+}
+main > section:first-of-type h1 {
+	margin-top: 0px;
+}
+
+#msg {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	padding: 10px;
+	text-align: center;
+	opacity: 1;
+	transition: top 200ms, opacity 200ms;
+}
+#msg:empty {
+	top: -20px;
+	opacity: 0;
+}
+#msg.ok {
+	background-color: #060;
+}
+#msg.warning {
+	background-color: #600;
+}
+
+#progress:empty {
+	height: 0px;
+}
+#progress {
+	background-color: #00201a;
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	height: 20px;
+	padding: 0px 5%;
+	gap: 2%;
+	transition: height 1s;
+}
+#progress #line {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	right: 5%;
+	width: 0%;
+	height: 2px;
+	background: #050;
+	transform: translateY(-50%);
+	z-index: 0;
+	transition: width 500ms;
+}
+#progress .milestone {
+	position: relative;
+	height: 6px;
+	/* width: 10px; */
+	flex: 0 1 5%;
+	margin: 0px 20px;
+	min-width: 4px;
+	background-color: #888;
+	border-radius: 10px;
+	z-index: 1;
+	transition: background-color 500ms;
+}
+#progress .milestone:not(:first-of-type) {
+	margin: 0px;
+}
+#progress .milestone.done {
+	background-color: #050;
+}
+#progress .milestone.current {
+	background-color: #0a0;
+}
+#progress .milestone.done::before {
+	display: block;
+	content: "";
+	background: radial-gradient(circle, #050 10%, rgba(0, 255, 0, 0) 100%);
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+	transform: translate(-50%, -50%) scale(1);
+	animation: explosion 1s ease-in-out forwards;
+}
+#progress .milestone.current::before {
+	display: block;
+	content: "";
+	background: radial-gradient(circle, #0a0 10%, rgba(0, 255, 0, 0) 100%);
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+	transform: translate(-50%, -50%) scale(1);
+	animation: explosion 1s ease-in-out forwards;
+}
+@keyframes explosion {
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 0;
+	}
+	50% {
+		transform: translate(-50%, -50%) scale(1, 0.5);
+		opacity: 1;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 0;
+	}
+}
+
+button {
+	background-color: #064;
+	color: #fff;
+	margin: 2px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 150ms;
+}
+button:hover {
+	background-color: #085;
+}
+
+input-check {
+	display: inline-block;
+	margin: 2px 5px;
+	padding: 10px;
+	background-color: #300;
+	border: 1px solid #800;
+	color: #fdd;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 150ms, border-color 150ms, color 150ms;
+}
+input-check:hover {
+	background-color: #430;
+	border-color: #860;
+	color: #fec;
+}
+input-check[checked] {
+	background-color: #030;
+	border: 1px solid #080;
+	color: #dfd;
+}
+input-check[checked]:hover {
+	background-color: #340;
+	border-color: #680;
+	color: #efc;
+}
+
+iframe {
+	background-color: #fff;
+	width: 100%;
+	height: 100%;
+	border: 0px;
+}
+#question {
+	margin-bottom: 5px;
+}
+code {
+	border: 1px solid #fff;
+	padding: 10px;
+	display: block;
+	user-select: none;
+	white-space: pre;
+	margin-bottom: 10px;
+}
+code > span[contenteditable] {
+	display: inline-block;
+	color: #aaf;
+	min-width: 10px;
+	border-bottom: 1px solid #557;
+}
+code > span[contenteditable]:empty:not(:focus) {
+	outline: 2px solid #aaf;
+}
+
+button {
+	padding: 5px;
+}
+.material-symbols-outlined {
+	vertical-align: middle;
+}

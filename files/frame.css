@@ -1,0 +1,33 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #eee;
+}
+h1 {
+	margin-top: 0px;
+	padding: 0px 10px;
+}
+p {
+	padding: 0px 10px;
+}
+code {
+	background-color: #000;
+	font-family: 'Courier New', Courier, monospace;
+	color: #fff;
+	display: block;
+	padding: 5px;
+	margin: 0px;
+}
+code:empty {
+	display: none;
+}
+main {
+	padding: 10px;
+}
+main h1 {
+	margin-top: 0px;
+}
