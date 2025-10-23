@@ -51,6 +51,28 @@ if(isset($_GET["level"])) {
 									$correct = ($answer);
 									$ok = true;
 									foreach($correct as $k => $v) {
+										if(isset($guess->$k)) {
+											if(json_encode($guess->$k) != json_encode($v)) {
+												$ok = false;
+												break;
+											}
+										} else {
+											$ok = false;
+										}
+									}
+									//$ret["msg"] = json_encode($ret["msg"]);
+									if($ok === true) {
+										$ret["status"] =	true;
+										$ret["msg"] =		"Helt rätt!";
+									} else {
+										$ret["status"] =	"wrong";
+										$ret["msg"] =		"Det verkar tyvärr vara fel. Försök igen!";
+									}
+								} elseif($leveldata[intval($_GET["level"])]["type"] === "vartype") {
+									// FIXA VARTYPE
+									$correct = ($answer);
+									$ok = true;
+									foreach($correct as $k => $v) {
 										if(json_encode($guess->$k) != json_encode($v)) {
 											$ok = false;
 											break;

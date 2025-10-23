@@ -116,6 +116,13 @@ $levels = [
 			"type" =>		"log",
 			"answer" =>		"*"
 		],[
+			"text" =>		"Spara värdet 2 i variabeln a.",
+			"docs" =>		"https://www.w3schools.com/js/js_let.asp",
+			"code" =>		'let a ¤operator¤ 2;', 
+			"type" =>		"var",
+			"variables" =>	"{'a':a}",
+			"answer" =>		["a" => 2]
+		],[
 			"text" =>		"Sätt variabeln a till värdet 5.",
 			"docs" =>		"https://www.w3schools.com/js/js_let.asp",
 			"code" =>		'let a = ¤Value¤;', 
@@ -168,7 +175,7 @@ $levels = [
 		],
 		[
 			"text" => "Vilket kodord används för att skapa en variabel du <b>INTE</b> kan ändra värdet på?",
-			"docs" => "https://www.w3schools.com/js/js_let.asp",
+			"docs" => "https://www.w3schools.com/js/js_const.asp",
 			"code" => '¤nyckelord¤ variabelNamn = "Ett värde";',
 			"type" => "text",
 			"answer" => "const variabelNamn = \"Ett värde\";"
@@ -269,35 +276,65 @@ $levels = [
 			"alts" => ["Sträng", "Boolean", "Nummer", "Array", "Objekt"],
 			"answer" => "Objekt"
 		],
-		
-
-
-
 		[
-			"text" => "Skapa en variabel c och se till att det får värdet 7.",
-			"docs" => "https://www.w3schools.com/js/js_types.asp",
-			"code" => 'let ¤namn¤ = ¤input¤;',
-			"type" => "var",
-			"variables" => "{'c':c}",
-			"answer" => ["c" => 7]
+			"text" => "Fixa koden så att 7 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'const a = 3;<br>const b = 4;<br>console.log(a ¤operator¤ b);',
+			"type" => "log",
+			"answer" => 7
 		],
 		[
-			"text" => "Skapa en variabel a och se till att det är en sträng.",
-			"docs" => "https://www.w3schools.com/js/js_types.asp",
-			"code" => 'let a = ¤input¤;',
-			"type" => "vartype",
-			"variables" => "{'a':a}",
-			"answer" => ["a" => "string"]
-		]
-	],
-	"html" =>	[		// Fixa validering och krav
+			"text" => "Fixa koden så att 1 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'const a = 4;<br>const b = 3;<br>console.log(a ¤operator¤ b);',
+			"type" => "log",
+			"answer" => 1
+		],
 		[
-			"text" => "Skapa ett div-element!",
-			"code" => '¤¤',
-			"type" => "element",
-			"variables" => "{'d':div}",
-			"answer" => ["d"=>"<div></div>"]
-		]
-	]
+			"text" => "Fixa koden så att 4 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'const a = 8;<br>const b = 2;<br>console.log(a ¤operator¤ b);',
+			"type" => "log",
+			"answer" => 4
+		],
+		[
+			"text" => "Fixa koden så att 9 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'const a = 3;<br>console.log(a ¤operator¤ a);',
+			"type" => "log",
+			"answer" => 9
+		],
+		[
+			"text" => "Fixa koden så att 5 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'let a = 4;<br>a¤operator¤;<br>console.log(a);',
+			"type" => "log",
+			"answer" => 5
+		],
+		[
+			"text" => "Fixa koden så att 4 skrivs ut!",
+			"docs" => "https://www.w3schools.com/js/js_arithmetic.asp",
+			"code" => 'let a = 5;<br>a¤operator¤;<br>console.log(a);',
+			"type" => "log",
+			"answer" => 4
+		],
+		// [	// FIXA VARTYPE
+		// 	"text" => "Skapa en variabel a och se till att det är en sträng.",
+		// 	"docs" => "https://www.w3schools.com/js/js_types.asp",
+		// 	"code" => 'let a = ¤input¤;',
+		// 	"type" => "vartype",
+		// 	"variables" => "{'a':a}",
+		// 	"answer" => ["a" => "string"]
+		// ]
+	],
+	// "html" =>	[		// Fixa validering och krav
+	// 	[
+	// 		"text" => "Skapa ett div-element!",
+	// 		"code" => '¤¤',
+	// 		"type" => "element",
+	// 		"variables" => "{'d':div}",
+	// 		"answer" => ["d"=>"<div></div>"]
+	// 	]
+	// ]
 ];
 ?>

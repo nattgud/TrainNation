@@ -47,6 +47,13 @@ if(isset($_GET["t"])) {
 		if($_SESSION["p"] == "js") {
 ?>
 		<script>
+			try {
+				eval("<?php echo rawurldecode($_GET["c"]); ?>");
+			} catch(e) {
+				console.log(e);
+			}
+		</script>
+		<script>
 <?php
 		
 		if(isset($leveldata[$level])) {

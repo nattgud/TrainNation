@@ -195,7 +195,7 @@ window.addEventListener("load", () => {
 							}
 						}, 1);
 					}
-					document.querySelector("#progress #line").style.width = ((data.progress[0])*(90/(data.progress[1]-1)))+"%";
+					document.querySelector("#progress #line").style.width = ((data.progress[0])*(96/(data.progress[1]-1)))+"%";
 				}
 				let inp = true;
 				let cmd = "";
@@ -383,10 +383,11 @@ window.addEventListener("load", () => {
 	} else {
 		cookies.set("train_level_"+trainType, 0, 1);
 	}
-	document.querySelector("iframe").addEventListener("load", function() {
-		// console.log(answerList);
-		//document.querySelector("#runButton").disabled = false;
-		answerList = [];
-	});
+	document.querySelector("iframe").addEventListener("error", () => console.log("Iframe kunde inte laddas"));
+	// document.querySelector("iframe").addEventListener("load", function() {
+	// 	// console.log(answerList);
+	// 	//document.querySelector("#runButton").disabled = false;
+	// 	answerList = [];
+	// });
 	loadLevel();
 });
