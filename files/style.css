@@ -1,6 +1,27 @@
 * {
 	box-sizing: border-box;
 }
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0px;
+	color: #fff;
+	overflow-x: hidden;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header, footer, main {
+	padding: 0px;
+	text-align: center;
+}
+header, footer {
+	flex: 0 0 100%;
+}
+main {
+	flex: 1 0 100%;
+	background-color: #00201a;
+}
+
 nav ul {
 	padding: 0px;
 	display: flex;
@@ -25,33 +46,13 @@ nav ul > li > a:hover {
 }
 nav ul > li > a > .material-symbols-outlined {
 	position: absolute;
-	top: 0px;
+	top: 8px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0px;
 	padding: 0px;
 	line-height: 10px;
-	color: #067;
-}
-body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	margin: 0px;
-	color: #fff;
-	overflow-x: hidden;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-header, footer, main {
-	padding: 0px;
-	text-align: center;
-}
-header, footer {
-	flex: 0 0 100%;
-}
-main {
-	flex: 1 0 100%;
-	background-color: #00201a;
+	font-size: 14px;
 }
 
 a {

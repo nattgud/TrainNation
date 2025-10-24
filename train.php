@@ -21,7 +21,25 @@ if(isset($levelGroups[$_SESSION["p"]])) {
 	</div>
 	<div id="doneWindow">
 		<h1>Klar!</h1>
-		<p>Det var allt som fanns här! Testa gärna någon av de andra delarna!</p>
+		<p>Det var allt som fanns här! <?php
+		$next = false;
+		foreach($levelGroups as $k => $v) {
+			if($k === $_SESSION["p"]) {
+				continue;
+			}
+			if(isset($_COOKIE["train_level_".$k]) === true) {
+				if(intval($_COOKIE["train_level_".$k]/count($levels[$k])) !== 1) {
+					$next = $k;
+					break;
+				}
+			}
+		}
+		if($next === false) {
+			echo "Testa gärna någon av de andra delarna!";
+		} else {
+			echo "Testa gärna någon annan del, t ex <a href=\"train.php?p=".$next."\">".$levelGroups[$next]."</a>";
+		}
+?></p>
 	</div>
 	<div>
 		<button id="backLevel"><span class="material-symbols-outlined">chevron_backward</span></button>

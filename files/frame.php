@@ -19,7 +19,7 @@ if(isset($_GET["t"])) {
 <?php
 	} elseif($_GET["t"] === "error") {
 		$msg = json_decode($_GET["e"]);
-		echo "<style> body { background-color: #a00; color: #ff0; } </style><h1>Koden kan inte köras!</h1><p>Fixa felet så att koden kan köras!</p><code>".$msg->error."<br><br>".$msg->code."</code>";
+		echo "<style> body { background-color: #a00; color: #ff0; } </style><h1>Koden kan inte köras!</h1><p>Fixa felet så att koden kan köras!</p><code>".$msg->error."</code>";
 	} else {
 		echo "<p>Något gick fel.</p>";
 	}
@@ -61,11 +61,14 @@ if(isset($_GET["t"])) {
 				echo rawurldecode($_GET["c"]);
 			}
 			if($leveldata[$level]["type"] === "var") {
-				echo "_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
+				echo "
+_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
 			} elseif($leveldata[$level]["type"] === "text") {
-				echo "_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
+				echo "
+_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
 			} elseif($leveldata[$level]["type"] === "log") {
-				echo "_________TRAINJS_RESULT_LOGCHECK();";
+				echo "
+_________TRAINJS_RESULT_LOGCHECK();";
 			}
 		}
 ?>

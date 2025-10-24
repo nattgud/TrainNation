@@ -10,8 +10,10 @@ $levelGroups = [
 	"git" =>	"Git",
 	"js" =>		"JS variabler",
 	"js2" =>	"JS villkor",
-	"js3" =>	"JS if",
+	"js3" =>	"JS villkor forts.",
+	"js4" =>	"JS if",
 ];
+require_once("files/leveldata.php");
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -20,7 +22,7 @@ $levelGroups = [
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>TrainNation</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-		<link rel="stylesheet" href="files/style.css">
+		<link rel="stylesheet" href="files/style.css?r=<?php echo rand(0, 9999); ?>">
 <?php
 if(isset($style)) {
 	foreach($style as $link) {
@@ -51,10 +53,9 @@ if(isset($script)) {
 			<nav>
 				<ul>
 					<li><a href=".">Hem</a></li><?php
-					require_once("files/leveldata.php");
 					foreach($levelGroups as $k => $v) {
 						$done = "";
-						if((intval($_COOKIE["train_level_".$k]) / count($levels[$k])) === 1) {
+						if((intval((isset($_COOKIE["train_level_".$k]))?$_COOKIE["train_level_".$k]:0) / count($levels[$k])) === 1) {
 							$done = " <span class=\"material-symbols-outlined\">done</span>";
 						}
 						echo '<li><a href="train.php?p='.$k.'" id="menuItem'.$k.'">'.$v.$done.'</a></li>';
