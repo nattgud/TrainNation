@@ -317,7 +317,7 @@ $levels = [
 			"code" => 'let a = 5;<br>a¤operator¤;<br>console.log(a);',
 			"type" => "log",
 			"answer" => 4
-		],
+		]
 		// [	// FIXA VARTYPE
 		// 	"text" => "Skapa en variabel a och se till att det är en sträng.",
 		// 	"docs" => "https://www.w3schools.com/js/js_types.asp",
@@ -326,7 +326,596 @@ $levels = [
 		// 	"variables" => "{'a':a}",
 		// 	"answer" => ["a" => "string"]
 		// ]
-	],
+	], 
+	"js2" => [
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 == 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '2 == 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"1" == 3;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 == "1";',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true == 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '0 == false;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 == false;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 === 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"4" === 4;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true === 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 > 2;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 < 2;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 < 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 > 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"2" > 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"2" < 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '2 > true;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true > 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '2 <= 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '3 >= 3;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true > 0;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true <= 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 != 1;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 != 5 && 3 < 9;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '3 == 3 || 3 >= 9;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"3" == 2 || 3 >= 9;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '"2" === 2 || 1 > 0.99;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '((5+5) <= 10 && 1 === true) || 2 === "2,0";',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '0 == true == 0;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'true + true < 2;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => '1 / 0 >= Infinity;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],
+		[
+			"text" => "Vad är resultatet av villkoret?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'Math.PI == 3.14;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],
+	], 
+	"js3" => [
+		[
+			"text" => "Vilket kodord används för att kontrollera något?",
+			"docs" => "https://www.w3schools.com/js/js_if.asp",
+			"code" => '¤kodord¤',
+			"type" => "text",
+			"answer" => "if"
+		],[
+			"text" => "Skriv en kod som kontrollerar ifall a är mer än b.",
+			"docs" => "https://www.w3schools.com/js/js_if.asp",
+			"code" => 'const a = 5;<br>const b = 4;<br>¤kodord¤(¤variabelNamn¤ ¤operator¤ ¤variabelNamn¤) {<br>   console.log("Korrekt");<br>} else {<br>   console.log("Fel");<br>}',
+			"type" => "log",
+			"answer" => "Korrekt"
+		],[
+			"text" => "Vad är resultatet av: age > maxAgeLimit ?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => "Vad är resultatet av: age === scoreText ?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => "Vad är resultatet av: age == scoreText ?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => "Vad är resultatet av: isStudent || (maxAgeLimit < 20) ?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => "Vad är resultatet av: !isStudent && (age > 25) ?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => "Vad är värdet på maxAgeLimit efter att all kod har körts (Ange som nummer)?",
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const age = 28;
+let maxAgeLimit = 30;
+
+const isStudent = true;
+const scoreText = "28";
+
+maxAgeLimit = 35;',
+			"type" => "input",
+			"answer" => "35"
+		],[
+			"text" => 'Vad är resultatet av: totalScore == "105" ?',
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad är resultatet av: dataArray === dataRef ?',
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => 'Vad är resultatet av: statusMsg === "false" ?',
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad är resultatet av: adminLevel > maxAttempts && statusMsg === "false" ?',
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => 'Vad är resultatet av: (userPoints - 100) === 0 || maxAttempts < adminLevel ?',
+			"docs" => "https://www.w3schools.com/js/js_comparisons.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad är värdet på hasPermission efter att all kod har körts?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const userPoints = 100;
+let adminLevel = 5;
+
+const statusMsg = "false";
+const maxAttempts = 10;
+
+let totalScore = userPoints + adminLevel;
+
+adminLevel = 7; 
+let hasPermission = totalScore > 100 && adminLevel >= 7; 
+// hasPermission = (105 > 100) && (7 >= 7) = true && true = true
+
+const dataArray = [10];
+const dataRef = [10];',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad exakt är värdet på totalScore?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const totalScore = baseScore + modifier * multiplier;',
+			"type" => "input",
+			"answer" => '130'
+		],[
+			"text" => 'Vad exakt är värdet på displayScore?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const displayScore = baseScore + modifier;',
+			"type" => "input",
+			"answer" => ['"10010"', "'10010'", "`10010`"]
+		],[
+			"text" => 'Vad är resultatet (true/false) av canAccess?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const canAccess = isAdmin && userLevel > 0;',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => 'Vad är det exakta värdet på setting?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const setting = "Admin" && 0 && "User";',
+			"type" => "input",
+			"answer" => '0'
+		],[
+			"text" => 'Vad är resultatet (true/false) av boolCheck?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const boolMath = true + true;
+const boolCheck = (boolMath == "2");',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad är resultatet (true/false) av nullCheck?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const nullCheck = (nullVar == 0);',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		],[
+			"text" => 'Vad är resultatet (true/false) av undefCheck?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const undefCheck = (nullVar == undefinedVar);',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "true"
+		],[
+			"text" => 'Vad är resultatet (true/false) av nanCheck?',
+			"docs" => "https://www.w3schools.com/js/js_operators.asp",
+			"code" => 'const baseScore = 100;
+let modifier = "10";
+const multiplier = 3;
+let userLevel = 0;
+const isAdmin = false;
+const nullVar = null;
+let undefinedVar;
+
+const notNum = baseScore * "abc";
+const nanCheck = (notNum == notNum);',
+			"type" => "alt",
+			"alts" => ["true", "false"],
+			"answer" => "false"
+		]
+	]
 	// "html" =>	[		// Fixa validering och krav
 	// 	[
 	// 		"text" => "Skapa ett div-element!",

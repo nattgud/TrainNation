@@ -44,14 +44,14 @@ if(isset($_GET["t"])) {
 				$level = intval($_GET["l"]);
 			}
 		}
-		if($_SESSION["p"] == "js") {
+		if(substr($_SESSION["p"], 0, 2) == "js") {
 ?>
 		<script>
-			try {
-				eval("<?php echo rawurldecode($_GET["c"]); ?>");
-			} catch(e) {
-				console.log(e);
-			}
+			// try {
+			// 	eval(`<?php //echo rawurldecode($_GET["c"]); ?>`);
+			// } catch(e) {
+			// 	_________trueLog(e);
+			// }
 		</script>
 		<script>
 <?php
@@ -64,6 +64,8 @@ if(isset($_GET["t"])) {
 				echo "_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
 			} elseif($leveldata[$level]["type"] === "text") {
 				echo "_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
+			} elseif($leveldata[$level]["type"] === "log") {
+				echo "_________TRAINJS_RESULT_LOGCHECK();";
 			}
 		}
 ?>

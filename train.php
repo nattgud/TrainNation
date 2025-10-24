@@ -2,14 +2,14 @@
 require_once("boot.php");
 ?>
 <section>
-	<div>
+	<div id="loadingWindow">
+		<h1>Laddar!</h1>
+		<p>Vänta lite så kommer det en fråga här!</p>
+	</div>
+	<div id="trainWindow">
 		<h1><span class="material-symbols-outlined">train</span><?php
-$levelNames = [
-	"git" =>	"Git",
-	"js" =>		"JavaScript"
-];
-if(isset($levelNames[$_SESSION["p"]])) {
-	echo $levelNames[$_SESSION["p"]];
+if(isset($levelGroups[$_SESSION["p"]])) {
+	echo $levelGroups[$_SESSION["p"]];
 } else {
 	echo "Nation";
 }
@@ -18,6 +18,10 @@ if(isset($levelNames[$_SESSION["p"]])) {
 		<code></code>
 		<div id="alts"></div>
 		<button id="runButton" disabled>Kör kod</button>
+	</div>
+	<div id="doneWindow">
+		<h1>Klar!</h1>
+		<p>Det var allt som fanns här! Testa gärna någon av de andra delarna!</p>
 	</div>
 	<div>
 		<button id="backLevel"><span class="material-symbols-outlined">chevron_backward</span></button>

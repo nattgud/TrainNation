@@ -68,25 +68,7 @@ if(isset($_GET["level"])) {
 										$ret["status"] =	"wrong";
 										$ret["msg"] =		"Det verkar tyvärr vara fel. Försök igen!";
 									}
-								} elseif($leveldata[intval($_GET["level"])]["type"] === "vartype") {
-									// FIXA VARTYPE
-									$correct = ($answer);
-									$ok = true;
-									foreach($correct as $k => $v) {
-										if(json_encode($guess->$k) != json_encode($v)) {
-											$ok = false;
-											break;
-										}
-									}
-									//$ret["msg"] = json_encode($ret["msg"]);
-									if($ok === true) {
-										$ret["status"] =	true;
-										$ret["msg"] =		"Helt rätt!";
-									} else {
-										$ret["status"] =	"wrong";
-										$ret["msg"] =		"Det verkar tyvärr vara fel. Försök igen!";
-									}
-								} elseif(in_array($leveldata[intval($_GET["level"])]["type"], ["text", "alt"])) {
+								} elseif(in_array($leveldata[intval($_GET["level"])]["type"], ["text", "alt", "input"])) {
 									if(gettype($answer) === "array") {
 										$check = in_array($guess, $answer);
 									} else {
@@ -120,7 +102,9 @@ if(isset($_GET["level"])) {
 			echo "false";
 		}
 	} else {
-		echo json_encode(null);
+		echo json_encode([
+			"progress" =>	[intval($_GET["level"]), count($leveldata)],
+		]);
 	}
 }
 ?>

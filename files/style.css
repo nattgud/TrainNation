@@ -3,20 +3,35 @@
 }
 nav ul {
 	padding: 0px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 nav ul > li {
 	list-style: none;
-	margin: 0px;
+	margin: 2px 0px;
 	padding: 0px;
 	display: inline-block;
 }
 nav ul > li > a {
+	display: inline-block;
+	position: relative;
 	padding: 10px 20px;
 	background-color: #021;
 	transition: background-color 150ms;
 }
 nav ul > li > a:hover {
 	background-color: #043;
+}
+nav ul > li > a > .material-symbols-outlined {
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0px;
+	padding: 0px;
+	line-height: 10px;
+	color: #067;
 }
 body {
 	display: flex;
@@ -72,7 +87,7 @@ main > section:first-of-type {
 	display: flex;
 	flex-direction: column;
 }
-main > section:first-of-type > div:first-of-type {
+main > section:first-of-type > div:not(:last-of-type) {
 	flex: 1 1 100px;
 }
 main > section:first-of-type > div:last-of-type {
@@ -80,6 +95,9 @@ main > section:first-of-type > div:last-of-type {
 }
 main > section:first-of-type h1 {
 	margin-top: 0px;
+}
+main > section:first-of-type > #trainWindow, main > section:first-of-type > #doneWindow {
+	display: none;
 }
 
 #msg {
@@ -113,7 +131,7 @@ main > section:first-of-type h1 {
 	align-items: center;
 	height: 20px;
 	padding: 0px 2%;
-	gap: 2%;
+	gap: 1%;
 	transition: height 1s;
 }
 #progress #line {
@@ -123,8 +141,8 @@ main > section:first-of-type h1 {
 	left: 2%;
 	right: 2%;
 	width: 0%;
-	height: 2px;
-	background: #050;
+	height: 1px;
+	background: #060;
 	transform: translateY(-50%);
 	z-index: 0;
 	transition: width 500ms;
@@ -145,10 +163,10 @@ main > section:first-of-type h1 {
 	margin: 0px;
 }
 #progress .milestone.done {
-	background-color: #050;
+	background-color: #060;
 }
 #progress .milestone.current {
-	background-color: #0a0;
+	background-color: #0aa;
 }
 #progress .milestone.done::before {
 	display: block;
@@ -167,7 +185,7 @@ main > section:first-of-type h1 {
 #progress .milestone.current::before {
 	display: block;
 	content: "";
-	background: radial-gradient(circle, #0a0 10%, rgba(0, 255, 0, 0) 100%);
+	background: radial-gradient(circle, #0ff 10%, rgba(0, 255, 0, 0) 100%);
 	width: 50px;
 	height: 50px;
 	border-radius: 100px;
@@ -207,6 +225,7 @@ button:hover {
 }
 
 input-check {
+	user-select: none;
 	display: inline-block;
 	margin: 2px 5px;
 	padding: 10px;
@@ -232,6 +251,13 @@ input-check[checked]:hover {
 	border-color: #680;
 	color: #efc;
 }
+input[type=text] {
+	background-color: #030;
+	border: 1px solid #080;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px;
+}
 
 iframe {
 	background-color: #fff;
@@ -243,12 +269,18 @@ iframe {
 	margin-bottom: 5px;
 }
 code {
+	background-color: #011;
 	border: 1px solid #fff;
+	border-radius: 5px;
 	padding: 10px;
 	display: block;
 	user-select: none;
 	white-space: pre;
 	margin-bottom: 10px;
+	transition: background-color 300ms;
+}
+code:has(span:focus), code:hover {
+	background-color: #022;
 }
 code > span[contenteditable] {
 	display: inline-block;

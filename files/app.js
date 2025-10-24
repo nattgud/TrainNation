@@ -15,6 +15,9 @@ function popup(txt = "", warn = null) {
 	}, 2000+(txt.length*25));
 }
 window.addEventListener("load", () => {
+	if(document.querySelector("#runButton") === null) {
+		return false;
+	};
 	let theClass = class check extends HTMLElement {
 		set disabled(v) {
 			if(v) {
@@ -121,7 +124,7 @@ window.addEventListener("load", () => {
 			let name = cname + "=";
 			let decodedCookie = decodeURIComponent(document.cookie);
 			let ca = decodedCookie.split(';');
-			for(let i = 0; i <ca.length; i++) {
+			for(let i = 0; i < ca.length; i++) {
 				let c = ca[i];
 				while (c.charAt(0) == ' ') {
 					c = c.substring(1);
@@ -133,12 +136,20 @@ window.addEventListener("load", () => {
 			return false;
 		}
 	}
+	if(cookies.get("train_level_"+trainType) !== false) {
+		level = Number(cookies.get("train_level_"+trainType));
+		if(level < 0) {
+			level = 0;
+		}
+	} else {
+		cookies.set("train_level_"+trainType, 0, 31);
+	}
 	function correct(v, m) {
 		popup(m, !v);
 		if(v === true) {
 			level++;
-			cookies.set("train_level_"+trainType, level, 1);
-			setTimeout(loadLevel, 500);
+			cookies.set("train_level_"+trainType, level, 31);
+			setTimeout(loadLevel, 2000);
 			// loadLevel();
 		} else {
 			document.querySelector("#runButton").disabled = false;
@@ -149,14 +160,7 @@ window.addEventListener("load", () => {
 		ajax('files/levels.php?type=gen&level='+level)
 			.then(data => {
 				data = JSON.parse(data);
-				if(data === null) {
-					//document.querySelector("#levelTitle").innerText = "";
-					document.querySelector("main > section:first-of-type").innerHTML = "<h1>Klar!</h1><p>Det var allt som fanns här, än så länge. Men det kan mycket möjligtvis dyka upp mer snart!</p>";
-					popup("Bra jobbat!", false);
-					document.querySelector("main > section:last-of-type").style.display = "none";
-					// document.querySelector("iframe").style.display = "none";
-					return false;
-				}
+				document.querySelector("#loadingWindow").style.display = "none";
 				if(data.progress !== undefined) {
 					const els = document.querySelectorAll("#progress > div:not(#line)");
 					if(els.length === 0) {
@@ -189,22 +193,54 @@ window.addEventListener("load", () => {
 							}
 						}
 						setTimeout(function() {
-							console.log(els);
-							if(!els[data.progress[0]].classList.contains("current")) {
-								els[data.progress[0]].classList.add("current");
+							if(els.length > data.progress[0]) {
+								if(!els[data.progress[0]].classList.contains("current")) {
+									els[data.progress[0]].classList.add("current");
+								}
 							}
 						}, 1);
 					}
-					document.querySelector("#progress #line").style.width = ((data.progress[0])*(96/(data.progress[1]-1)))+"%";
+					let p = ((data.progress[0])*(96/(data.progress[1]-1)));
+					document.querySelector("#progress #line").style.width = ((p >= 96)?96:p)+"%";
+				}
+				if(data.q === undefined) {
+					document.querySelector("#doneWindow").style.display = "block";
+					document.querySelector("#trainWindow").style.display = "none";
+					//document.querySelector("#levelTitle").innerText = "";
+					// document.querySelector("main > section:first-of-type > div:first-of-type").innerHTML = "<h1>Klar!</h1><p>Det var allt som fanns här, än så länge. Men det kan mycket möjligtvis dyka upp mer snart!</p>";
+					popup("Bra jobbat!", false);
+					document.querySelector("main > section:last-of-type").style.display = "none";
+					// document.querySelector("iframe").style.display = "none";
+					if(document.querySelector("#menuItem"+trainType) !== null) {
+						if(document.querySelector("#menuItem"+trainType+" > .material-symbols-outlined") === null) {
+							let tmp = document.createElement("SPAN");
+							tmp.innerText = "done";
+							tmp.classList.add("material-symbols-outlined");
+							document.querySelector("#menuItem"+trainType).innerText = document.querySelector("#menuItem"+trainType).innerText.trim()+" ";
+							document.querySelector("#menuItem"+trainType).appendChild(tmp);
+						}
+					}
+					return false;
+				} else {
+					if(document.querySelector("#menuItem"+trainType) !== null) {
+						if(document.querySelector("#menuItem"+trainType+" > .material-symbols-outlined") !== null) {
+							let tmp = document.querySelector("#menuItem"+trainType+" > .material-symbols-outlined");
+							tmp.parentNode.removeChild(tmp);
+							document.querySelector("#menuItem"+trainType).innerText = document.querySelector("#menuItem"+trainType).innerText.trim();
+						}
+					}
+					document.querySelector("#doneWindow").style.display = "none";
+					document.querySelector("#trainWindow").style.display = "block";
 				}
 				let inp = true;
 				let cmd = "";
-				if(["text", "alt"].indexOf(data.type) !== -1) {
+				if(["text", "alt", "input"].indexOf(data.type) !== -1) {
 					document.querySelector("#runButton").innerText = "Svara";
 				} else {
 					document.querySelector("#runButton").innerText = "Kör kod";
 				}
-				if(data.type !== "alt") {
+				document.querySelector("#alts").innerHTML = "";
+				if(["alt", "input"].indexOf(data.type) === -1) {
 					document.querySelector("#alts").style.display = "none";
 					for(let x of data.code) {
 						if(x === "¤") {
@@ -218,9 +254,8 @@ window.addEventListener("load", () => {
 							cmd += x;
 						}
 					}
-				} else {
+				} else if(data.type === "alt") {
 					document.querySelector("#alts").style.display = "block";
-					document.querySelector("#alts").innerHTML = "";
 					cmd = data.code;
 					for(let alt of data.alts) {
 						const tmp = document.createElement("input-check");
@@ -228,6 +263,14 @@ window.addEventListener("load", () => {
 						tmp.name = "qAlts";
 						document.querySelector("#alts").appendChild(tmp);
 					}
+				} else if(data.type === "input") {
+					document.querySelector("#alts").style.display = "block";
+					cmd = data.code;
+					const tmp = document.createElement("input");
+					tmp.type = "text";
+					tmp.placeholder = "Svar";
+					tmp.name = "qAnswer";
+					document.querySelector("#alts").appendChild(tmp);
 				}
 				document.querySelector("#question").innerHTML = data.q;
 				document.querySelector("code").innerHTML = cmd;
@@ -251,7 +294,6 @@ window.addEventListener("load", () => {
 							}
 						});
 					}
-					// console.log(els);
 				}, 1);
 				document.querySelector("#levelTitle").innerText = " - Level "+(level+1);
 				const iframe = document.querySelector('main > section:nth-of-type(2) > iframe');
@@ -266,7 +308,7 @@ window.addEventListener("load", () => {
 					}
 				}
 				document.querySelector("#docs").style.display = "inline";
-				if(["text", "alt"].indexOf(data.type) !== -1) {
+				if(["text", "alt", "input"].indexOf(data.type) !== -1) {
 					iframe.parentNode.style.display = "none";
 					iframe.style.display = "none";
 				} else {
@@ -286,9 +328,10 @@ window.addEventListener("load", () => {
 				let code = document.querySelector("main > section:nth-of-type(1) code").innerText;
 				if(data.type === "alt") {
 					code = document.querySelector("input-check[name=qAlts]").value;
+				} else if(data.type === "input") {
+					code = document.querySelector("input[name=qAnswer]").value;
 				}
-				if(["text", "alt"].indexOf(data.type) !== -1) {
-					console.log(code);
+				if(["text", "alt", "input"].indexOf(data.type) !== -1) {
 					ajax('files/levels.php?type=answer&level='+level+'&answer='+JSON.stringify(code))
 						.then(data => {
 							data = JSON.parse(data);
@@ -310,25 +353,34 @@ window.addEventListener("load", () => {
 				console.error(err);
 			});
 	}
-	document.querySelector("#runButton").addEventListener("click", runCode);
-	document.querySelector("#resetLevel").addEventListener("click", function() {
-		const ok = confirm("Vill du nollställa nivåerna? Du kan inte ångra detta!");
-		if(ok === true) {
-			popup("Nollställer nivåerna.");
-			level = 0;
-			cookies.set("train_level_"+trainType, level, 1);
-			loadLevel();
-		}
-	});
-	document.querySelector("#backLevel").addEventListener("click", function() {
-		const ok = confirm("Vill du gå tillbaka en nivå? Du kan inte ångra detta!");
-		if(ok === true) {
-			popup("Backar en nivå.");
-			level--;
-			cookies.set("train_level_"+trainType, level, 1);
-			loadLevel();
-		}
-	});
+	if(document.querySelector("#runButton") !== null) {
+		document.querySelector("#runButton").addEventListener("click", runCode);
+	}
+	if(document.querySelector("#resetLevel") !== null) {
+		document.querySelector("#resetLevel").addEventListener("click", function() {
+			const ok = confirm("Vill du nollställa nivåerna? Du kan inte ångra detta!");
+			if(ok === true) {
+				popup("Nollställer nivåerna.");
+				level = 0;
+				cookies.set("train_level_"+trainType, level, 31);
+				loadLevel();
+			}
+		});
+	}
+	if(document.querySelector("#backLevel") !== null) {
+		document.querySelector("#backLevel").addEventListener("click", function() {
+			const ok = confirm("Vill du gå tillbaka en nivå? Du kan inte ångra detta!");
+			if(ok === true) {
+				popup("Backar en nivå.");
+				level--;
+				if(level < 0) {
+					level = 0;
+				}
+				cookies.set("train_level_"+trainType, level, 31);
+				loadLevel();
+			}
+		});
+	}
 	const listener = e => {
 		if(e.data.origin !== undefined) {
 			if(e.data.origin === "trainjs") {
@@ -370,24 +422,12 @@ window.addEventListener("load", () => {
 					const code = document.querySelector("main > section:nth-of-type(1) code").innerText;
 					const iframe = document.querySelector('main > section:nth-of-type(2) > iframe');
 					const msg = (e.data.msg);
-					// console.log(msg);
-					// iframe.src = "files/frame.php?t=error&c="+encodeURIComponent(code)+"&e="+encodeURIComponent(msg);
+					iframe.src = "files/frame.php?t=error&c="+encodeURIComponent(code)+"&e="+encodeURIComponent(msg);
 				}
 				// console.table(e.data);
 			}
 		}
 	};
 	window.addEventListener('message', listener);
-	if(cookies.get("train_level_"+trainType) !== false) {
-		level = Number(cookies.get("train_level_"+trainType));
-	} else {
-		cookies.set("train_level_"+trainType, 0, 1);
-	}
-	document.querySelector("iframe").addEventListener("error", () => console.log("Iframe kunde inte laddas"));
-	// document.querySelector("iframe").addEventListener("load", function() {
-	// 	// console.log(answerList);
-	// 	//document.querySelector("#runButton").disabled = false;
-	// 	answerList = [];
-	// });
 	loadLevel();
 });

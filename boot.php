@@ -6,6 +6,12 @@ if(isset($_GET["p"])) {
 } elseif(!isset($_SESSION["p"])) {
 	$_SESSION["p"] = "git";
 }
+$levelGroups = [
+	"git" =>	"Git",
+	"js" =>		"JS variabler",
+	"js2" =>	"JS villkor",
+	"js3" =>	"JS if",
+];
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -44,7 +50,16 @@ if(isset($script)) {
 			<h2><span class="material-symbols-outlined">train</span>Nation</h2>
 			<nav>
 				<ul>
-					<li><a href=".">Hem</a></li><li><a href="train.php?p=git">Git</a></li><li><a href="train.php?p=js">JavaScript</a></li>
+					<li><a href=".">Hem</a></li><?php
+					require_once("files/leveldata.php");
+					foreach($levelGroups as $k => $v) {
+						$done = "";
+						if((intval($_COOKIE["train_level_".$k]) / count($levels[$k])) === 1) {
+							$done = " <span class=\"material-symbols-outlined\">done</span>";
+						}
+						echo '<li><a href="train.php?p='.$k.'" id="menuItem'.$k.'">'.$v.$done.'</a></li>';
+					}
+					?>
 				</ul>
 			</nav>
 		</header>
