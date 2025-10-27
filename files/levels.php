@@ -68,16 +68,37 @@ if(isset($_GET["level"])) {
 										$ret["status"] =	"wrong";
 										$ret["msg"] =		"Det verkar tyvärr vara fel. Försök igen!";
 									}
-								} elseif(in_array($leveldata[intval($_GET["level"])]["type"], ["text", "alt", "input"])) {
+								} elseif(in_array($leveldata[intval($_GET["level"])]["type"], ["text", "alt", "input", "keyword"])) {
 									if(gettype($answer) === "array") {
-										$check = in_array($guess, $answer, true);
-										if($check === false) {
-											$check = (in_array($guess, $answer))?"almost":false;
+										if(gettype($guess) === "array") {
+											$check = true;
+											foreach($guess as $g) {
+												if(in_array($g, $answer, true) === false) {
+													$check = false;
+													break;
+												}
+												
+											}
+										} else {
+											$check = in_array($guess, $answer, true);
+											if($check === false) {
+												$check = (in_array($guess, $answer))?"almost":false;
+											}
 										}
 									} else {
-										$check = $answer === $guess;
-										if($check === false) {
-											$check = (strtolower($answer) === strtolower($guess))?"almost":false;
+										if(gettype($guess) === "array") {
+											$check = true;
+											foreach($guess as $g) {
+												if($g !== $answer) {
+													$check = false;
+													break;
+												}
+											}
+										} else {
+											$check = $answer === $guess;
+											if($check === false) {
+												$check = (strtolower($answer) === strtolower($guess))?"almost":false;
+											}
 										}
 									}
 									if($check === "almost") {
@@ -88,6 +109,7 @@ if(isset($_GET["level"])) {
 										$ret["msg"] =		"Helt rätt!";
 									} else {
 										$ret["status"] =	"wrong";
+										$ret["debug"] =		$answer;
 										$ret["msg"] =		"Det verkar tyvärr vara fel. Försök igen!";
 									}
 								} else {

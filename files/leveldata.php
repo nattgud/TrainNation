@@ -808,7 +808,8 @@ $levels = [
 			"text" => "Vad skrivs ut?",
 			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
 			"code" => 'if(true) {<br>   console.log("A");<br>} else {<br>   console.log("B");<br>}',
-			"type" => "input",
+			"type" => "alt",
+			"alts" =>	["A", "B"],
 			"answer" => "A"
 		],[
 			"text" => "Skriv en kod som kontrollerar ifall a är mer än b.",
@@ -820,10 +821,9 @@ $levels = [
 			"text" => "Vad heter kodordet som saknas?.",
 			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
 			"code" => 'if(5 === "5") {<br>   console.log("Sant");<br>} ¤kodord¤ {<br>   console.log("Falskt");<br>}',
-			"type" => "log",
-			"answer" => "Falskt"
-		],
-		[
+			"type" => "keyword",
+			"answer" => 'else'
+		],[
 			"text" => "Vad kommer skrivas ut?",
 			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
 			"code" => 'if(true) {<br>   console.log("Första");<br>}<br>if(true) {<br>   console.log("Andra");<br>}',

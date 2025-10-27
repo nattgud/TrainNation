@@ -377,11 +377,19 @@ window.addEventListener("load", () => {
 					code = document.querySelector("input-check[name=qAlts]").value;
 				} else if(data.type === "input") {
 					code = document.querySelector("input[name=qAnswer]").value;
+				} else if(data.type === "keyword") {
+					const els = document.querySelector("main > section:nth-of-type(1) code").querySelectorAll("span[contenteditable");
+					code = [];
+					for(let x of els) {
+						code.push(x.innerText);
+					}
 				}
-				if(["text", "alt", "input"].indexOf(data.type) !== -1) {
+				if(["text", "alt", "input", "keyword"].indexOf(data.type) !== -1) {
+					console.log(JSON.stringify(code));
 					ajax('files/levels.php?type=answer&level='+level+'&answer='+JSON.stringify(code))
 						.then(data => {
 							data = JSON.parse(data);
+							console.log(data);
 							if(data.status === true) {
 								correct(true, data.msg);
 							} else {
@@ -480,7 +488,7 @@ window.addEventListener("load", () => {
 });
 window.addEventListener("load", function() {
 	const truthtable = document.querySelector("#truthtable");
-	if(truthtable !== undefined) {
+	if(truthtable !== null) {
 		/**
 		* Kör användarkod isolerat i en Web Worker.
 		* Koden kan använda console.log men har ingen DOM eller nätverksåtkomst.
@@ -548,10 +556,10 @@ window.addEventListener("load", function() {
 			"||":	"#400",
 		};
 		const vals = ['"abc"', '0', '1', 'true', 'false', 'null', 'undefined', '"0"', '"1"', '"true"', '"false"', '["abc"]', '[0]', '[1]', '[true]', '[false]'];
-		const ops = ["+", "-", "*", "/", "==", "===", "!=", "!=="];
+		const ops = ["+", "-", "*", "/", "==", "===", "!=", "!==", "&&", "||"];
 		// console.log(vals.length*ops.length*vals.length);
-		for(const v1 of vals) {
-			for(const o of ops) {
+		for(const o of ops) {
+			for(const v1 of vals) {
 				for(const v2 of vals) {
 					const cmd = v1+" "+o+" "+v2;
 					const card = this.document.createElement("DIV");
@@ -576,12 +584,12 @@ window.addEventListener("load", function() {
 							card.style.backgroundColor = "#000";
 							return false;
 						}
+						spans[4].innerText = data.data;
 						if(data.vtype === "boolean") {
 							spans[4].style.backgroundColor = (data.data === true)?"#067":"#076";
+						} else {
+							spans[4].style.backgroundColor = bgColors[data.vtype];
 						}
-						// console.log(data.data+": "+data.vtype)
-						spans[4].innerText = data.data;
-						card.style.backgroundColor = bgColors[data.vtype];
 					});
 					card.appendChild(spans[0]);
 					card.appendChild(spans[1]);
@@ -592,7 +600,5 @@ window.addEventListener("load", function() {
 				}
 			}
 		}
-	} else {
-		console.log("not exist");
 	}
 });
