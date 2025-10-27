@@ -11,6 +11,7 @@ $levelGroups = [
 	"js" =>		"JS variabler",
 	"js2" =>	"JS villkor",
 	"js3" =>	"JS villkor forts.",
+	"jsts" =>	"JS Fel",
 	"js4" =>	"JS if",
 ];
 require_once("files/leveldata.php");
@@ -52,7 +53,8 @@ if(isset($script)) {
 			<h2><span class="material-symbols-outlined">train</span>Nation</h2>
 			<nav>
 				<ul>
-					<li><a href=".">Hem</a></li><?php
+					<li><a href=".">Hem</a></li>
+					<li><a href="truth.php">Sanningstabell</a></li><?php
 					foreach($levelGroups as $k => $v) {
 						$done = "";
 						if((intval((isset($_COOKIE["train_level_".$k]))?$_COOKIE["train_level_".$k]:0) / count($levels[$k])) === 1) {

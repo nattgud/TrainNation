@@ -136,6 +136,45 @@ window.addEventListener("load", () => {
 			return false;
 		}
 	}
+	let caret = {
+		getPos: function(el) {
+			const sel = window.getSelection();
+			if (!sel.rangeCount) return 0;
+
+			const range = sel.getRangeAt(0);
+			const preRange = range.cloneRange();
+
+			preRange.selectNodeContents(el);
+			preRange.setEnd(range.endContainer, range.endOffset);
+
+			return preRange.toString().length;
+		}, setPos: function(el, i) {
+			const range = document.createRange();
+			const sel = window.getSelection();
+
+			let nodeStack = [el], node, found = false, charsLeft = i;
+
+			while (!found && (node = nodeStack.pop())) {
+				if (node.nodeType === 3) {
+				if (node.length >= charsLeft) {
+					range.setStart(node, charsLeft);
+					range.collapse(true);
+					found = true;
+				} else {
+					charsLeft -= node.length;
+				}
+				} else {
+					let children = Array.from(node.childNodes);
+					for (let i = children.length - 1; i >= 0; i--) nodeStack.push(children[i]);
+				}
+			}
+
+			if (found) {
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
+		}
+	}
 	if(cookies.get("train_level_"+trainType) !== false) {
 		level = Number(cookies.get("train_level_"+trainType));
 		if(level < 0) {
@@ -155,6 +194,7 @@ window.addEventListener("load", () => {
 			document.querySelector("#runButton").disabled = false;
 		}
 	}
+
 	function loadLevel() {
 		document.querySelector("#levelTitle").innerText = " - Level ?";
 		ajax('files/levels.php?type=gen&level='+level)
@@ -291,6 +331,13 @@ window.addEventListener("load", () => {
 							if(x.dataset.first == 1) {
 								x.removeAttribute("data-first");
 								x.innerText = "";
+							}
+						});
+						x.addEventListener("input", function(e) {
+							if(x.innerText.indexOf("\n") !== -1) {
+								let pos = x.innerText.indexOf("\n");
+								x.innerText = x.innerText.replace(/\n/g, "");
+								caret.setPos(x, pos);
 							}
 						});
 					}
@@ -430,4 +477,122 @@ window.addEventListener("load", () => {
 	};
 	window.addEventListener('message', listener);
 	loadLevel();
+});
+window.addEventListener("load", function() {
+	const truthtable = document.querySelector("#truthtable");
+	if(truthtable !== undefined) {
+		/**
+		* Kör användarkod isolerat i en Web Worker.
+		* Koden kan använda console.log men har ingen DOM eller nätverksåtkomst.
+		* @param {string} userCode - JavaScript-kod från användaren
+		* @param {(type: 'log'|'error'|'done', data: any) => void} callback - Hantera resultat och fel
+		*/
+		// Skapa worker från en Blob
+		const blob = new Blob([`
+		self.fetch = () => { throw new Error('fetch disabled'); };
+		self.XMLHttpRequest = class { constructor(){ throw new Error('XHR disabled'); } };
+		self.WebSocket = class { constructor(){ throw new Error('WebSocket disabled'); } };
+		self.importScripts = () => { throw new Error('importScripts disabled'); };
+
+		self.onmessage = (e) => {
+		try {
+		const result = new Function('"use strict"; return (' + e.data[0] + ')')();
+		self.postMessage({id: e.data[1], type:'result', data: result, vtype: (typeof result)});
+		} catch(err) {
+		self.postMessage({id: e.data[1], type:'error', message: String(err)});
+		}
+		};
+		`], { type: 'application/javascript' });
+
+		const worker = new Worker(URL.createObjectURL(blob));
+		let functions = [];
+		worker.onmessage = (ev) => {
+			if(ev.data.type === 'result') functions[ev.data.id](ev.data);
+			if(ev.data.type === 'error') functions[ev.data.id]({type: 'error', data: ev.data.message});
+			functions[ev.data.id] = null;
+		};
+		let killTimer = null;
+		function runIsolated(userCode, callback) {
+			const id = functions.length;
+			functions.push(callback);
+			worker.postMessage([userCode, id]);
+			clearTimeout(killTimer);
+			killTimer = setTimeout(() => worker.terminate(), 5000);
+		}
+
+		truthtable.innerHTML = "";
+		const typeColors = {
+			"string":		"#500",
+			"number":		"#060",
+			"boolean":		"#055",
+			"object":		"#550",
+			"undefined":	"#505"
+		};
+		const bgColors = {
+			"string":		"#300",
+			"number":		"#040",
+			"boolean":		"#033",
+			"object":		"#330",
+			"undefined":	"#303"
+		};
+		const opColors = {
+			"+":	"#444",
+			"-":	"#040",
+			"*":	"#040",
+			"/":	"#040",
+			"==":	"#044",
+			"===":	"#044",
+			"!=":	"#044",
+			"!==":	"#044",
+			"&&":	"#040",
+			"||":	"#400",
+		};
+		const vals = ['"abc"', '0', '1', 'true', 'false', 'null', 'undefined', '"0"', '"1"', '"true"', '"false"', '["abc"]', '[0]', '[1]', '[true]', '[false]'];
+		const ops = ["+", "-", "*", "/", "==", "===", "!=", "!=="];
+		// console.log(vals.length*ops.length*vals.length);
+		for(const v1 of vals) {
+			for(const o of ops) {
+				for(const v2 of vals) {
+					const cmd = v1+" "+o+" "+v2;
+					const card = this.document.createElement("DIV");
+					const spans = [
+						this.document.createElement("SPAN"),
+						this.document.createElement("SPAN"),
+						this.document.createElement("SPAN"),
+						this.document.createElement("SPAN"),
+						this.document.createElement("SPAN")
+					];
+					spans[0].innerText = v1;
+					spans[1].innerText = o;
+					spans[2].innerText = v2;
+					spans[3].innerText = "=";
+					spans[4].innerText = "?"
+					spans[0].style.backgroundColor = typeColors[typeof eval(v1)];
+					spans[1].style.backgroundColor = opColors[o];
+					spans[2].style.backgroundColor = typeColors[typeof eval(v2)];
+					spans[3].style.backgroundColor = "#222";
+					runIsolated(cmd, function(data) {
+						if(data.type === "error") {
+							card.style.backgroundColor = "#000";
+							return false;
+						}
+						if(data.vtype === "boolean") {
+							spans[4].style.backgroundColor = (data.data === true)?"#067":"#076";
+						}
+						// console.log(data.data+": "+data.vtype)
+						spans[4].innerText = data.data;
+						card.style.backgroundColor = bgColors[data.vtype];
+					});
+					card.appendChild(spans[0]);
+					card.appendChild(spans[1]);
+					card.appendChild(spans[2]);
+					card.appendChild(spans[3]);
+					card.appendChild(spans[4]);
+					truthtable.appendChild(card);
+				}
+			}
+		}
+	} else {
+		console.log("not exist");
+	}
 });

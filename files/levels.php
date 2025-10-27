@@ -42,7 +42,7 @@ if(isset($_GET["level"])) {
 										$ret["msg"] =		"Helt rätt!";
 									} elseif(strtolower($answer) === strtolower($guess)) {
 										$ret["status"] =	"wrong";
-										$ret["msg"] =		"Har du skrivit helt rätt? Tänk på versaler och gemener. '".$answer."' + '".$guess."'";
+										$ret["msg"] =		"Har du skrivit helt rätt? Tänk på stora och små bokstäver. '".$answer."' + '".$guess."'";
 									} else {
 										$ret["status"] =	"wrong";
 										$ret["msg"]	=		"Det var tyvärr fel. Försök igen!";
@@ -70,11 +70,20 @@ if(isset($_GET["level"])) {
 									}
 								} elseif(in_array($leveldata[intval($_GET["level"])]["type"], ["text", "alt", "input"])) {
 									if(gettype($answer) === "array") {
-										$check = in_array($guess, $answer);
+										$check = in_array($guess, $answer, true);
+										if($check === false) {
+											$check = (in_array($guess, $answer))?"almost":false;
+										}
 									} else {
 										$check = $answer === $guess;
+										if($check === false) {
+											$check = (strtolower($answer) === strtolower($guess))?"almost":false;
+										}
 									}
-									if($check) {
+									if($check === "almost") {
+										$ret["status"] =	"wrong";
+										$ret["msg"] =		"Det var tyvärr fel. Har du tänkt på stora och små bokstäver?";
+									} elseif($check === true) {
 										$ret["status"] =	true;
 										$ret["msg"] =		"Helt rätt!";
 									} else {

@@ -724,13 +724,92 @@ $levels = [
 			"answer" => "false"
 		]
 	], 
+	"jsts" => [
+		[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'if (true console.log("hej"));',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Syntax Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'function loop(){<br>   loop();<br>}<br>loop();',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Range Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'let num = 123;<br>num();',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Type Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'var x = ;',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Syntax Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'console.log(abc);',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Reference Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'function foo() {<br>   return x;<br>}<br>foo();',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Reference Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'let f;<br>f();',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Type Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'let arr = new Array(-5);',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Range Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'let x = null;<br>console.log(x.name);',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Type Error"
+		],[
+			"text" => "Vilken typ av fel har uppstått i koden?",
+			"docs" => "https://www.w3schools.com/js/js_errors_intro.asp",
+			"code" => 'function test() {<br>   console.log("hej");',
+			"type" => "alt",
+			"alts" => ["Reference Error", "Type Error", "Range Error", "Syntax Error"],
+			"answer" => "Syntax Error"
+		]
+	],
 	"js4" => [
 			[
-			"text" => "Vilket kodord används för att kontrollera något?",
+			"text" => "Vilket kodord används för att kontrollera ifall ett villkor stämmer för att i så fall utföra något?",
 			"docs" => "https://www.w3schools.com/js/js_if.asp",
 			"code" => '¤kodord¤',
 			"type" => "text",
 			"answer" => "if"
+		],[
+			"text" => "Vad skrivs ut?",
+			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
+			"code" => 'if(true) {<br>   console.log("A");<br>} else {<br>   console.log("B");<br>}',
+			"type" => "input",
+			"answer" => "A"
 		],[
 			"text" => "Skriv en kod som kontrollerar ifall a är mer än b.",
 			"docs" => "https://www.w3schools.com/js/js_if.asp",
@@ -743,7 +822,16 @@ $levels = [
 			"code" => 'if(5 === "5") {<br>   console.log("Sant");<br>} ¤kodord¤ {<br>   console.log("Falskt");<br>}',
 			"type" => "log",
 			"answer" => "Falskt"
-		]
+		],
+		[
+			"text" => "Vad kommer skrivas ut?",
+			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
+			"code" => 'if(true) {<br>   console.log("Första");<br>}<br>if(true) {<br>   console.log("Andra");<br>}',
+			"type" => "alt",
+			"alts" => ['"Första"', '"Andra"', '"Första" sen "Andra"', '"Andra" sen "Första"'],
+			"answer" => '"Första" sen "Andra"'
+		],		///// REVIEW!!!!
+		
 	]
 	// "html" =>	[		// Fixa validering och krav
 	// 	[

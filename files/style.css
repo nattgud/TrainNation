@@ -299,3 +299,24 @@ button {
 .material-symbols-outlined {
 	vertical-align: middle;
 }
+
+#truthtable {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 10px;
+	padding: 10px;
+}
+#truthtable > div {
+	flex: 1 0 auto;
+	display: flex;
+	background-color: #032;
+	border-radius: 5px;
+	color: #fff;
+}
+#truthtable > div > span {
+	padding: 5px;
+	border-radius: 5px;
+	flex: 1;
+	white-space: nowrap;
+	text-align: center;
+}
