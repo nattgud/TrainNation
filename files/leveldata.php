@@ -1,4 +1,40 @@
 <?php
+/*
+
+"type" => "code",
+"answer" => [
+	[
+		"type" => "if",
+		"condition" => [
+			"left" => [
+				"value" => 1
+			],
+			"op" => "==",
+			"right" => [
+				"name" => "a"
+			]
+		],
+			"else" => true
+	], 
+	[
+		"type" => "for",
+		"init" => [
+			"name" => "a",
+			"value" => 1
+		],
+		"condition" => [
+			"left" => ["name" => "a"],
+			"op" => "<=",
+			"right" => ["value" => 9]
+		],
+		"update" => [
+			"operator" => "--",
+			"name" => "a"
+		]
+	]
+]
+
+*/
 $levels = [
 	"git" => [
 		[
@@ -798,7 +834,12 @@ $levels = [
 		]
 	],
 	"js4" => [
-			[
+		[
+			"text" => "Såhär skapar du en enkel if-sats där villkoret är ifall numret 1 är samma värde och datatyp som det andra värdet 1. Det finns även en kopplad else till if-satsen. I varje del finns en console.log för att skriva ut antingen Sant eller Falskt.",
+			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
+			"code" => 'if(1 === 1) {<br>   console.log("Sant");<br>} else {<br>   console.log("Falskt");<br>}',
+			"type" => "info"
+		],[
 			"text" => "Vilket kodord används för att kontrollera ifall ett villkor stämmer för att i så fall utföra något?",
 			"docs" => "https://www.w3schools.com/js/js_if.asp",
 			"code" => '¤kodord¤',
@@ -830,7 +871,25 @@ $levels = [
 			"type" => "alt",
 			"alts" => ['"Första"', '"Andra"', '"Första" sen "Andra"', '"Andra" sen "Första"'],
 			"answer" => '"Första" sen "Andra"'
-		],		///// REVIEW!!!!
+		],[
+			"text" => "Vilken if-sats är säkrast när man får data från en databas man själv inte utvecklat?",
+			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
+			"code" => 'const a = fetchFromDB();<br>if(a) {<br>   console.log("Alternativ A");<br>}<br>if(a === true) {<br>   console.log("Alternativ B");<br>}',
+			"type" => "alt",
+			"alts" =>	["Första if-satsen", "Andra if-satsen"],
+			"answer" => "Andra if-satsen"
+		],[
+			"text" => "Skriv en kod som innehåller en if-sats och en kopplad else-sats. Villkor etc väljer du själv.",
+			"docs" => "https://www.w3schools.com/js/js_if_else.asp",
+			"code" => '¤if(1 == a) {<br>   console.log("test";<br>}¤',
+			"type" => "code",
+			"answer" => [
+				[
+					"type" => "if",
+					"else" => true
+				]
+			]
+		]
 		
 	]
 	// "html" =>	[		// Fixa validering och krav

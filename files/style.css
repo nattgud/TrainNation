@@ -17,6 +17,15 @@ header, footer, main {
 header, footer {
 	flex: 0 0 100%;
 }
+header > h2 > a {
+	color: #dfd;
+	letter-spacing: 0px;
+	transition: letter-spacing 150ms;
+}
+header > h2 > a:hover {
+	color: #fff;
+	letter-spacing: 5px;
+}
 main {
 	flex: 1 0 100%;
 	background-color: #00201a;
@@ -33,6 +42,7 @@ nav ul > li {
 	margin: 2px 0px;
 	padding: 0px;
 	display: inline-block;
+	position: relative;
 }
 nav ul > li > a {
 	display: inline-block;
@@ -41,7 +51,28 @@ nav ul > li > a {
 	background-color: #021;
 	transition: background-color 150ms;
 }
-nav ul > li > a:hover {
+nav > ul > li > ul > li {
+	display: none;
+}
+nav > ul > li > ul {
+	position: absolute;
+	left: 0px;
+	display: flex;
+	gap: 0px;
+	align-items: flex-start;
+	flex-direction: column;
+	z-index: 5;
+}
+nav > ul > li:hover > ul > li {
+	display: block;
+	width: 100%;
+	margin: 0px;
+}
+nav > ul > li:hover > ul > li > a {
+	width: 100%;
+	border: 1px solid #000;
+}
+nav ul > li:hover > a {
 	background-color: #043;
 }
 nav ul > li > a > .material-symbols-outlined {
@@ -265,19 +296,57 @@ iframe {
 	width: 100%;
 	height: 100%;
 	border: 0px;
+	transition: filter 100ms;
+}
+iframe.fade {
+	filter: brightness(0);
 }
 #question {
 	margin-bottom: 5px;
 }
+#codewindow * {
+	font-family: 'Courier New', Courier, monospace;
+}
+#codewindow {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+#codewindow > #codeLinenumbers {
+	position: absolute;
+	display: inline-block;
+	left: 5px;
+	top: 11px;
+	bottom: 11px;
+	text-align: right;
+	color: #888;
+	z-index: 2;
+	overflow: hidden;
+}
+#codewindow > #codeLinenumbers > span {
+	display: block;
+	transition: color 500ms, font-weight 500ms;
+}
+#codewindow > #codeLinenumbers > span.error {
+	position: relative;
+	color: #f00;
+	font-weight: bold;
+}
+#codewindow > #codeLinenumbers > span.error:before {
+	content: ">";
+	left: 0px;
+	position: absolute;
+}
 code {
+	position: relative;
 	background-color: #011;
 	border: 1px solid #fff;
 	border-radius: 5px;
-	padding: 10px;
+	padding: 10px 10px 10px 40px;
 	display: block;
 	user-select: none;
 	white-space: pre;
-	margin-bottom: 10px;
 	transition: background-color 300ms;
 }
 code:has(span:focus), code:hover {
@@ -319,3 +388,23 @@ button {
 	white-space: nowrap;
 	text-align: center;
 }
+#truthtable > div > span:nth-of-type(4) {
+	flex: 0 1 10px;
+	background-color: #000;
+}
+
+#truthtable.filter_plus > div:not(.f_plus) { display: none; }
+#truthtable.filter_minus > div:not(.f_minus) { display: none; }
+#truthtable.filter_multi > div:not(.f_multi) { display: none; }
+#truthtable.filter_div > div:not(.f_div) { display: none; }
+#truthtable.filter_eq > div:not(.f_eq) { display: none; }
+#truthtable.filter_eqt > div:not(.f_eqt) { display: none; }
+#truthtable.filter_neq > div:not(.f_neq) { display: none; }
+#truthtable.filter_neqt > div:not(.f_neqt) { display: none; }
+#truthtable.filter_and > div:not(.f_and) { display: none; }
+#truthtable.filter_or > div:not(.f_or) { display: none; }
+#truthtable.filter_string > div:not(.f_string) { display: none; }
+#truthtable.filter_number > div:not(.f_number) { display: none; }
+#truthtable.filter_boolean > div:not(.f_boolean) { display: none; }
+#truthtable.filter_object > div:not(.f_object) { display: none; }
+#truthtable.filter_undefined > div:not(.f_undefined) { display: none; }

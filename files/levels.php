@@ -11,7 +11,8 @@ if(isset($_GET["level"])) {
 		if(isset($_GET["type"])) {
 			if($_GET["type"] === "typecheck") {
 				echo json_encode([
-					"type" =>		$leveldata[intval($_GET["level"])]["type"]
+					"type" =>		$leveldata[intval($_GET["level"])]["type"],
+					"checks" =>		($leveldata[intval($_GET["level"])]["type"] === "code")?$leveldata[intval($_GET["level"])]["answer"]:[]
 				]);
 			} elseif($_GET["type"] === "gen") {
 				echo json_encode([

@@ -1,5 +1,6 @@
 function _________msg(type, msg) {
 	parent.postMessage({
+		qType: (levelType !== undefined)?levelType:false,
 		origin: "trainjs",
 		type: type,
 		msg: msg

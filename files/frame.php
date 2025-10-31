@@ -52,23 +52,31 @@ if(isset($_GET["t"])) {
 			// } catch(e) {
 			// 	_________trueLog(e);
 			// }
+<?php
+		if($leveldata[$level]["type"] === "info") {
+			echo "const levelType = \"info\";";
+		}
+?>
 		</script>
 		<script>
 <?php
 		
 		if(isset($leveldata[$level])) {
-			if($leveldata[$level]["type"] !== "text") {
-				echo rawurldecode($_GET["c"]);
-			}
-			if($leveldata[$level]["type"] === "var") {
-				echo "
-_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
-			} elseif($leveldata[$level]["type"] === "text") {
-				echo "
-_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
-			} elseif($leveldata[$level]["type"] === "log") {
-				echo "
-_________TRAINJS_RESULT_LOGCHECK();";
+			echo rawurldecode($_GET["c"]);
+			if($leveldata[$level]["type"] !== "info") {
+				if($leveldata[$level]["type"] !== "text") {
+					echo rawurldecode($_GET["c"]);
+				}
+				if($leveldata[$level]["type"] === "var") {
+					echo "
+	_________TRAINJS_RESULT(".$leveldata[$level]["variables"].");";
+				} elseif($leveldata[$level]["type"] === "text") {
+					echo "
+	_________TRAINJS_RESULT_T(".json_encode(rawurldecode($_GET["c"])).");";
+				} elseif($leveldata[$level]["type"] === "log") {
+					echo "
+	_________TRAINJS_RESULT_LOGCHECK();";
+				}
 			}
 		}
 ?>

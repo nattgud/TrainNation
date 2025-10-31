@@ -15,7 +15,14 @@ if(isset($levelGroups[$_SESSION["p"]])) {
 }
 ?><span id="levelTitle"></span> <a href="#" target="_blank" id="docs" class="material-symbols-outlined" style="display: none;">dictionary</a></h1>
 		<div id="question"></div>
-		<code></code>
+		<div id="codewindow">
+			<span id="codeLinenumbers"><?php
+for($c = 1; $c < 1000; $c++) {
+	echo "<span id=\"codeRow".$c."\">".$c."</span>";
+}			
+?></span>
+			<code></code>
+		</div>
 		<div id="alts"></div>
 		<button id="runButton" disabled>Kör kod</button>
 	</div>
