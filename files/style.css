@@ -86,6 +86,73 @@ nav ul > li > a > .material-symbols-outlined {
 	font-size: 14px;
 }
 
+#totalCenter {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	z-index: 10;
+	backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+	pointer-events: none;
+	transition: backdrop-filter 300ms, -webkit-background-filter 300ms, opacity 300ms;
+	opacity: 0;
+}
+#totalCenter.enabled {
+	backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+	opacity: 1;
+}
+#totalCenter > div {
+	background-color: #021;
+	padding: 20px;
+	border-radius: 5px;
+	border: 1px solid #064;
+	position: fixed;
+	top: -100vh;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: top 300ms;
+}
+#totalCenter.enabled {
+	pointer-events: all;
+}
+#totalCenter.enabled > div.enabled {
+	top: 50%!important;
+}
+#user {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.loginForm form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.loginForm h3 {
+	margin: 0px 0px 10px;
+	letter-spacing: 2px;
+}
+.loginForm p {
+	margin: 2px 0px
+}
+.loginForm form > input {
+	margin: 10px 0px;
+	padding: 10px;
+}
+.loginForm form > input[type=email] {
+	background-color: #400;
+}
+.loginForm form > input[type=password] {
+	background-color: #400;
+}
+.loginForm#form_reg > p {
+	font-style: italic;
+}
+
 a {
 	color: #0ac;
 	text-decoration: none;
@@ -139,6 +206,7 @@ main > section:first-of-type > #trainWindow, main > section:first-of-type > #don
 	padding: 10px;
 	text-align: center;
 	opacity: 1;
+	z-index: 20;
 	transition: top 200ms, opacity 200ms;
 }
 #msg:empty {
@@ -182,8 +250,7 @@ main > section:first-of-type > #trainWindow, main > section:first-of-type > #don
 #progress .milestone {
 	position: relative;
 	height: 6px;
-	/* width: 10px; */
-	flex: 0 1 5%;
+	flex: 0 1 4%;
 	margin: 0px 20px;
 	min-width: 4px;
 	background-color: #888;
@@ -199,6 +266,32 @@ main > section:first-of-type > #trainWindow, main > section:first-of-type > #don
 }
 #progress .milestone.current {
 	background-color: #0aa;
+}
+@media (max-width: 767px) {
+	#progress .infostage::after {
+		content: "i";
+		display: inline-block;
+		color: #fff;
+		position: absolute;
+		left: 50%;
+		top: -10px;
+		font-size: 50%;
+		z-index: 300;
+		transform: translate(-50%, 0);
+	}
+}
+@media (min-width: 768px) {
+	#progress .infostage::after {
+		content: "info";
+		display: inline-block;
+		color: #fff;
+		position: absolute;
+		left: 50%;
+		top: -10px;
+		font-size: 50%;
+		z-index: 300;
+		transform: translate(-50%, 0);
+	}
 }
 #progress .milestone.done::before {
 	display: block;
@@ -243,6 +336,130 @@ main > section:first-of-type > #trainWindow, main > section:first-of-type > #don
 	}
 }
 
+#userMedals {
+	margin-top: 5px;
+	max-height: 40vh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	gap: 10px;
+}
+#userMedals > .medalContainer {
+	position: relative;
+	flex: 0 1 auto;
+	background: linear-gradient(
+		135deg,
+		#fc0 20%,
+		#ca0 30%,
+		#b80 40%
+	);
+	background-size: 200% 200%;
+	border: 1px solid #ba0;
+	padding: 10px;
+	border-radius: 100%;
+	cursor: pointer;
+	/* animation: shine 2s ease-in-out infinite; */
+}
+#userMedals > .medalContainer > div {
+	background-color: #064;
+	border-radius: 10px;
+	padding: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	opacity: 0.9;
+	border: 1px solid #fe0;
+	pointer-events: none;
+	transform: translate(-50%, -50%) scale(0, 0);
+	z-index: 100;
+	transition: transform 150ms;
+	animation: shine 600ms ease-in-out infinite;
+}
+#userMedals > .medalContainer > div > h4 > .material-symbols-outlined {
+	margin-right: 5px;
+}
+#userMedals > .medalContainer::before {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	display: block;
+	content: "";
+	background: linear-gradient(
+		45deg,
+		rgba(0, 0, 0, 0) 0%,
+		#fff 20%,
+		rgba(0, 0, 0, 0) 35%
+	);
+	transform: rotate(90deg);
+	border-radius: 100%;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	animation: goldshine 2s linear infinite;
+}
+@media (max-width: 767px) {
+	#userMedals > .medalContainer > div {
+		min-width: 50vw;
+	}
+}
+@media (min-width: 768px) {
+	#userMedals > .medalContainer > div {
+		min-width: 10vw;
+	}
+}
+#userMedals > .medalContainer:hover div {
+	transform: translate(-50%, -50%) scale(1, 1);
+
+}
+#userMedals > .medalContainer h4,#userMedals > .medalContainer p {
+	margin: 0px;
+}
+#userMedals > .medalContainer > .material-symbols-outlined {
+	margin: 0px;
+	color: #860;
+}
+@keyframes shine {
+	0% {
+		box-shadow: 0px 0px 2px #fd0;
+	}
+	50% {
+		box-shadow: 0px 0px 10px #fd0;
+	}
+	100% {
+		box-shadow: 0px 0px 2px #fd0;
+	}
+}
+@keyframes goldshine {
+	0%		{	opacity: 0;	transform: rotate(45deg); }
+	50%		{	opacity: 1;	transform: rotate(90deg); }
+	100%	{	opacity: 0;	transform: rotate(135deg); }
+}
+#medalNotice {
+	position: fixed;
+	bottom: -100vh;
+	right: -100vw;
+	background-color: #064;
+	padding: 10px;
+	border: 1px solid #fd0;
+	border-radius: 10px;
+	animation: shine 500ms ease-in-out infinite;
+	z-index: 100;
+	transform: scale(0.2, 0.2);
+	transition: bottom 500ms, right 500ms, transform 500ms;
+}
+#medalNotice.open {
+	right: 20px;
+	bottom: 20px;
+	transform: scale(1, 1);
+}
+#medalNotice h3, #medalNotice p {
+	margin: 0px;
+}
+#medalNotice h3 {
+	display: inline-block;
+}
+
 button {
 	background-color: #064;
 	color: #fff;
@@ -252,7 +469,10 @@ button {
 	cursor: pointer;
 	transition: background-color 150ms;
 }
-button:hover {
+button:disabled {
+	background-color: #444;
+}
+button:not(:disabled):hover {
 	background-color: #085;
 }
 
@@ -283,7 +503,7 @@ input-check[checked]:hover {
 	border-color: #680;
 	color: #efc;
 }
-input[type=text] {
+input[type=text],input[type=email],input[type=password] {
 	background-color: #030;
 	border: 1px solid #080;
 	color: #fff;
@@ -303,6 +523,10 @@ iframe.fade {
 }
 #question {
 	margin-bottom: 5px;
+}
+#question b {
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
 }
 #codewindow * {
 	font-family: 'Courier New', Courier, monospace;
@@ -341,7 +565,7 @@ iframe.fade {
 code {
 	position: relative;
 	background-color: #011;
-	border: 1px solid #fff;
+	border: 1px solid #666;
 	border-radius: 5px;
 	padding: 10px 10px 10px 40px;
 	display: block;
@@ -367,6 +591,12 @@ button {
 }
 .material-symbols-outlined {
 	vertical-align: middle;
+}
+
+.table2r {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 5px;
 }
 
 #truthtable {

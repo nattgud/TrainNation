@@ -24,11 +24,11 @@ for($c = 1; $c < 1000; $c++) {
 			<code></code>
 		</div>
 		<div id="alts"></div>
-		<button id="runButton" disabled>Kör kod</button>
+		<button id="runButton" disabled>Kör kod</button><span id="nextLoading"></span>
 	</div>
 	<div id="doneWindow">
-		<h1>Klar!</h1>
-		<p>Det var allt som fanns här! <?php
+		<h1><span class="material-symbols-outlined">trophy</span> Då var du klar med denna delen!</h1>
+		<p><?php
 		$next = false;
 		foreach($levelGroups as $k => $v) {
 			if($k === $_SESSION["p"]) {
@@ -42,9 +42,9 @@ for($c = 1; $c < 1000; $c++) {
 			}
 		}
 		if($next === false) {
-			echo "Testa gärna någon av de andra delarna!";
+			echo "Det ser ut som att du är klar med precis allting här. Snyggt jobbat!<br>Men kom gärna tillbaka. Det kommer nya grejer ganska ofta!";
 		} else {
-			echo "Testa gärna någon annan del, t ex <a href=\"train.php?p=".$next."\">".$levelGroups[$next]."</a>";
+			echo "Fortsätt gärna med nästa del, <a href=\"train.php?p=".$next."\">".$levelGroups[$next]."</a>";
 		}
 ?></p>
 	</div>

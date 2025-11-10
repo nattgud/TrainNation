@@ -5,6 +5,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Simulator</title>
 		<link rel="stylesheet" href="frame.css">
+		<script>
+		window.addEventListener("message", function(data) {
+			if(data !== undefined) {
+				if(data.data !== undefined) {
+					if(data.data.uhtml !== undefined) {
+						document.write(data.data.uhtml);
+					}
+				}
+			}
+		});
+		</script>
 		<script src="frame.js?r=<?php echo rand(0, 9999); ?>"></script>
 	</head>
 	<body>
@@ -46,6 +57,7 @@ if(isset($_GET["t"])) {
 		}
 		if(substr($_SESSION["p"], 0, 2) == "js") {
 ?>
+		<div id="log"></div>
 		<script>
 			// try {
 			// 	eval(`<?php //echo rawurldecode($_GET["c"]); ?>`);
@@ -55,6 +67,8 @@ if(isset($_GET["t"])) {
 <?php
 		if($leveldata[$level]["type"] === "info") {
 			echo "const levelType = \"info\";";
+		} else {
+			echo "const levelType = undefined;";
 		}
 ?>
 		</script>
@@ -62,7 +76,7 @@ if(isset($_GET["t"])) {
 <?php
 		
 		if(isset($leveldata[$level])) {
-			echo rawurldecode($_GET["c"]);
+			// echo rawurldecode($_GET["c"]);
 			if($leveldata[$level]["type"] !== "info") {
 				if($leveldata[$level]["type"] !== "text") {
 					echo rawurldecode($_GET["c"]);
@@ -77,6 +91,8 @@ if(isset($_GET["t"])) {
 					echo "
 	_________TRAINJS_RESULT_LOGCHECK();";
 				}
+			} else {
+				echo rawurldecode($_GET["c"]);
 			}
 		}
 ?>
